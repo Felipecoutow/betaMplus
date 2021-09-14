@@ -1,0 +1,1445 @@
+/*====  RESET ============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/*====  VARIABLES ============================ */
+:root {
+  --header-height: 4.5rem;
+
+  /* colors */
+  --hue: 240;
+  /* HSL color mode */
+  --base-color: hsl(var(--hue) 36% 57%);
+  --base-color-second: hsl(var(--hue) 65% 88%);
+  --base-color-alt: hsl(var(--hue) 57% 53%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 98%);
+
+  /* fonts */
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: '', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+}
+
+/*===  BASE ============================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font: 400 1rem var(--body-font);
+  color: var(--text-color);
+  background: var(--body-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+.title {
+  font: 700 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+.button {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 2rem;
+  font: 500 1rem var(--body-font);
+  transition: background 0.3s;
+  border: none;
+}
+
+.button:hover {
+  background: var(--base-color-alt);
+}
+
+.divider-1 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 57%, 1),
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
+}
+
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%, 1)
+  );
+}
+
+/*====  LAYOUT ============================ */
+.container {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.section {
+  padding: calc(5rem + var(--header-height)) 0;
+}
+
+.section .title {
+  margin-bottom: 1rem;
+}
+
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.section header {
+  margin-bottom: 4rem;
+}
+
+.section header strong {
+  color: var(--base-color);
+}
+
+#header {
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 2rem;
+  display: flex;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--body-color);
+  width: 100%;
+}
+
+#header.scroll {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+}
+
+/*====  LOGO ============================ */
+.logo {
+  width: 4rem;
+  color: var(--title-color);
+}
+
+.logo span {
+  width: 6rem;
+  color: var(--base-color);
+}
+
+.logo-alt span {
+  color: var(--body-color);
+}
+
+/*====  NAVIGATION ============================ */
+nav {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+nav ul li {
+  text-align: center;
+}
+
+nav ul li a {
+  transition: color 0.2s;
+  position: relative;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--base-color);
+}
+
+nav ul li a::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: var(--base-color);
+
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+
+  transition: width 0.2s;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
+}
+
+nav .menu ul {
+  display: none;
+}
+
+/* Mostrar menu */
+nav.show .menu {
+  opacity: 1;
+  visibility: visible;
+
+  background: var(--body-color);
+
+  height: 100vh;
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: grid;
+  place-content: center;
+}
+
+nav.show .menu ul {
+  display: grid;
+}
+
+nav.show ul.grid {
+  gap: 4rem;
+}
+
+/* toggle menu */
+.toggle {
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+nav .icon-close {
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+
+  transition: 0.2s;
+}
+
+nav.show div.icon-close {
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+/*====  Pagina Inicial ============================ */
+
+/*====  INICIAL ============================ */
+#home {
+  overflow: hidden;
+}
+
+#home .container {
+  margin: 0;
+}
+
+#home .image {
+  position: relative;
+}
+
+#home .image::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0;
+}
+
+#home .image img {
+  width: 26rem;
+  position: relative;
+  right: 2.93rem;
+}
+
+#home .image img,
+#home .image::before {
+  border-radius: 0.25rem;
+}
+
+#home .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#home .text h1 {
+  margin-bottom: 1rem;
+}
+
+#home .text p {
+  margin-bottom: 2rem;
+}
+
+/*====  SOBRE ============================ */
+#about {
+  background: white;
+}
+
+#about .container {
+  margin: 0;
+}
+
+#about .image {
+  position: relative;
+}
+
+#about .image::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -8.3%;
+  left: -33%;
+  z-index: 0;
+}
+
+#about .image img {
+  position: relative;
+}
+
+#about .image img,
+#about .image::before {
+  border-radius: 0.25rem;
+}
+
+#about .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/*====  SERVIÇOS ============================ */
+.cards.grid {
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 3.625rem 2rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  border-bottom: 0.25rem solid var(--base-color);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.card i {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 5rem;
+  color: var(--base-color);
+}
+
+.card .title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/*====  PROPERTIES ============================ */
+#properties {
+  background: white;
+}
+
+#properties .container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#properties header {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0;
+}
+
+#properties blockquote {
+  padding: 0rem;
+  border-radius: 0.25rem;
+}
+
+/* swiper */
+.swiper-slide {
+  height: auto;
+  padding: 4rem 1rem;
+}
+
+.swiper-pagination-bullet {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--base-color);
+}
+
+/*====  CONTACT ============================ */
+#contact .grid {
+  gap: 4rem;
+}
+
+#contact .text p {
+  margin-bottom: 2rem;
+}
+
+#contact .button i,
+#contact ul li i {
+  font-size: 1.5rem;
+  margin-right: 0.625rem;
+}
+
+#contact ul.grid {
+  gap: 2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+}
+
+#contact ul li i {
+  color: var(--base-color);
+}
+
+/*====  FOOTER ============================ */
+footer {
+  background: var(--base-color);
+}
+
+footer.section {
+  padding: 4rem 0;
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+footer .social {
+  grid-auto-flow: column;
+  width: fit-content;
+}
+
+footer .social a {
+  transition: 0.3s;
+  display: inline-block;
+}
+
+footer .social a:hover {
+  transform: translateY(-8px);
+}
+
+/* Back to top */
+.back-to-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+
+  padding: 0.5rem;
+  clip-path: circle();
+
+  font-size: 1.5rem;
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 0.3s;
+  transform: translateY(100%);
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*====  FIM DA PAGINA INCIAL ============================ */
+
+/*====  Pagina Cards Imóveis ============================ */
+/*=== CARDS PROPERTIES */
+.cards-properties.grid{
+  gap: 1.5rem;
+}
+
+.card-properties {
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: auto;
+}
+
+.card-properties .title {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  margin-top: 1rem;
+}
+
+.card-header img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 250px;
+}
+
+.card-properties h1{
+  color: var(--base-color-alt);
+}
+
+.tag {
+  background: #cccccc;
+  border-radius: 50px;
+  font-size: 12px;
+  margin: 0;
+  color: #fff;
+  padding: 2px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tag-teal {
+  background-color: #47bcd4;
+}
+.tag-purple {
+  background-color: #5e76bf;
+}
+.tag-pink {
+  background-color: #cd5b9f;
+}
+
+.card-body p {
+  font-size: var(--subtitle-font-size);
+  margin: 0 0 20px;
+}
+
+.view-button {
+  align-self: flex-end;
+}
+
+.card-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  background-color: var(--base-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: auto;
+  height: 30rem;
+}
+
+.card-view h3 {
+  color: #ffff;
+  text-decoration: underline;
+}
+/*==== Pagina de Informações do Imóvel ============================ */
+
+/*==== Informações ============================ */
+
+#information-properties {
+  background: white;
+}
+
+#information-properties .container {
+  margin: 0;
+}
+
+#information-properties .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+#information-properties h1 {
+  margin-bottom: 1rem;
+  color: var(--base-color-alt);
+}
+
+#information-properties h3 {
+  margin-bottom: 1rem;
+  font-size: var(--subtitle-font-size);
+}
+
+.lado-lado{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.card-properties.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/*SLIDER*/
+.slide img {
+  max-width: 100%;
+  height: 100%;
+}
+
+.slide {
+  width: auto;
+  margin: 20px auto;
+  display: grid;
+  box-shadow: 0 4px 20px 2px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+}
+
+.slide-items {
+  position: relative;
+  grid-area: 1/1;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.slide-nav {
+  grid-area: 1/1;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.slide-nav button {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  height: 14rem;
+}
+
+.slide-items > * {
+  position: absolute;
+  top: 0px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slide-items > .active {
+  position: relative;
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.slide-thumb {
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+  display: flex;
+  grid-column: 1 / 3;
+}
+
+.slide-thumb > span {
+  flex: 1;
+  display: block;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.4);
+  margin: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.slide-thumb > span.active::after {
+  content: '';
+  display: block;
+  height: inherit;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  transform: translateX(-100%);
+  animation: thumb 5s forwards linear;
+}
+
+@keyframes thumb {
+  to {
+    transform: initial;
+  }
+}
+/*Fim do Slide
+
+/*==== Pagina de Informações do Imóvel ============================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*========= MEDIA QUERIES =========*/
+@media (max-width: 320px) {
+    /* reusable classes */
+    .container {
+      max-width: 320px;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+
+    .section {
+      padding: calc(4rem + var(--header-height)) 0;
+    }
+  
+    .button {
+      height: 3.125rem;
+    }
+
+    .card {
+      padding: 3.625rem 1rem;
+    }
+
+
+    /*=== Informações do Imóvel ======*/
+    .slide{
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    .section .title{
+      margin-bottom: 0.5rem;
+    }
+
+    .description{
+      margin-bottom: 1.5rem;
+    }
+
+    li{
+      margin-bottom: 1rem;
+    }
+  
+    #lado-lado li{
+      margin-bottom: 0.2rem;
+    }
+    
+}
+
+@media (min-width: 321px ) and (max-width: 375px) {
+  /* reusable classes */
+  .container {
+    max-width: 375px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .section {
+    padding: calc(5rem + var(--header-height)) 0;
+  }
+
+  /*=== Informações do Imóvel ======*/
+  .slide{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .section .title{
+    margin-bottom: 0.5rem;
+  }
+  
+  .description{
+    margin-bottom: 1.5rem;
+  }
+
+  li{
+    margin-bottom: 1rem;
+  }
+
+  #lado-lado li{
+    margin-bottom: 0.5rem;
+  }
+
+}
+
+@media (min-width: 376px ) and (max-width: 425px) {
+  /* reusable classes */
+  .container {
+    max-width: 425px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .section {
+    padding: calc(6rem + var(--header-height)) 0;
+  }
+
+  /*=== Informações do Imóvel ======*/
+  .slide{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .section .title{
+    margin-bottom: 0.5rem;
+  }
+  
+  .description{
+    margin-bottom: 1.5rem;
+  }
+
+  li{
+    margin-bottom: 1rem;
+  }
+
+  #lado-lado li{
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 426px ) and (max-width: 768px) {
+  /* reusable classes */
+  .container {
+    max-width: 768px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .section {
+    padding: calc(5rem + var(--header-height)) 0;
+  }
+
+  /* services */
+  @media (min-width: 550px){
+    .cards {
+      grid-template-columns: 1fr 1fr;
+    }
+    .cards-properties.grid {
+      gap: 1.5rem;
+      grid-template-columns: 1fr 1fr;
+  }
+  }
+  
+  /*=== Informações do Imóvel ======*/
+  .slide{
+    margin-top: -2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .section .title{
+    margin-bottom: 1rem;
+  }
+  
+  .description{
+    margin-bottom: 1.5rem;
+  }
+
+  li{
+    margin-bottom: 1rem;
+  }
+
+  #lado-lado li{
+    margin-bottom: 0.5rem;
+  }
+}
+
+
+@media (min-width: 769px ) and (max-width: 1024px) {
+  /* reusable classes */
+  .container {
+    max-width: 1024px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .section {
+    padding: calc(5rem + var(--header-height)) 0;
+  }
+
+  section#home{
+    padding: 6rem;
+    margin-top: 7rem;
+  }
+
+  .section header,
+  #properties header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+   /* navigation */
+   nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  /* layout */
+  main {
+    margin-top: var(--header-height);
+  }
+
+
+  /* about */
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+  
+
+   /* services */
+   .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+
+  /*PAGE REAL ESTATE GALLERY*/
+  .cards-properties.grid {
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /*=== Informações do Imóvel ======*/
+  .slide{
+    margin-top: -5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .section .title{
+    margin-bottom: 1rem;
+  }
+  
+  .description{
+    margin-bottom: 1.5rem;
+  }
+
+  li{
+    margin-bottom: 1rem;
+  }
+
+  #lado-lado li{
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 1025px ) and (max-width: 1440px) {
+    /* reusable classes */
+    .container {
+      max-width: 1440px;
+      margin-left: 2.5rem;
+      margin-right: 2.5rem;
+    }
+  
+    .section {
+      padding: 7rem 0;
+    }
+  
+    .section header,
+    #properties header {
+      max-width: 32rem;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .button {
+      height: 3.125rem;
+    }
+  
+    /* navigation */
+    nav .menu {
+      opacity: 1;
+      visibility: visible;
+      top: 0;
+    }
+  
+    nav .menu ul {
+      display: flex;
+      gap: 2rem;
+    }
+  
+    nav .menu ul li a.title {
+      font: 400 1rem var(--body-font);
+      -webkit-font-smoothing: antialiased;
+    }
+  
+    nav .menu ul li a.title.active {
+      font-weight: bold;
+      -webkit-font-smoothing: auto;
+    }
+  
+    nav .icon-menu {
+      display: none;
+    }
+  
+    /* layout */
+    main {
+      margin-top: var(--header-height);
+    }
+  
+    /* home */
+    #home .container {
+      grid-auto-flow: column;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+  
+    #home .image {
+      order: 1;
+    }
+  
+    #home .text {
+      margin-left: 5rem;
+      margin-top: 5rem;
+      order: 0;
+      max-width: 24rem;
+      text-align: left;
+    }
+  
+    /* about */
+    #about .container {
+      margin: 0 auto;
+      grid-auto-flow: column;
+    }
+  
+    /* services */
+    .cards {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  
+    .card {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  
+    /* Cards Swiper Pagina incial */
+    #properties .container {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #properties blockquote{
+      padding: 0rem 4rem;
+    }
+  
+    /* contact */
+    #contact .container {
+      grid-auto-flow: column;
+      align-items: center;
+    }
+  
+    #contact .text {
+      max-width: 25rem;
+    }
+  
+    /* footer */
+    footer.section {
+      padding: 3.75rem 0;
+    }
+  
+    footer .container {
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    footer .logo {
+      font-size: 2.25rem;
+    }
+
+    /*PAGE REAL ESTATE GALLERY*/
+   .cards-properties.grid {
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+   }
+
+  /*=== Informações do Imóvel ======*/
+  .slide{
+    width: 35rem;
+    height: 25rem;
+    margin-right: 2.5rem;
+  }
+  
+  .section .title{
+    margin-bottom: 1rem;
+  }
+
+  li{
+    margin-bottom: 1rem;
+  }
+
+  #lado-lado li{
+    margin-bottom: 0.5rem;
+  }
+
+  #information-properties .text{
+    margin-right: 2.5rem;
+  }
+  
+  .description{
+    margin-bottom: 1.5rem;
+  }
+
+  /* Informações do Imóvel */ 
+  @media (min-width: 500px){
+    #information-properties .container{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    }
+}
+
+@media (min-width: 1441px ) and (max-width: 2560px) {
+    /* reusable classes */
+    .container {
+      max-width: 2560px;
+      margin-left: 2.5rem;
+      margin-right: 2.5rem;
+    }
+
+    .section {
+      padding: calc(5rem + var(--header-height)) 0;
+    }
+
+    .section header,
+    #properties header {
+      max-width: 32rem;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .button {
+      height: 3.125rem;
+    }
+
+    /* navigation */
+    nav .menu {
+      opacity: 1;
+      visibility: visible;
+      top: 0;
+    }
+
+    nav .menu ul {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav .menu ul li a.title {
+      font: 400 1rem var(--body-font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav .menu ul li a.title.active {
+      font-weight: bold;
+      -webkit-font-smoothing: auto;
+    }
+
+    nav .icon-menu {
+      display: none;
+    }
+
+  /* layout */
+  main {
+      margin-top: var(--header-height);
+    }
+
+    /* home */
+    #home .container {
+      grid-auto-flow: column;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    #home .image {
+      order: 1;
+    }
+
+    #home .text {
+      margin-top: 5rem;
+      order: 0;
+      max-width: 24rem;
+      text-align: left;
+    }
+
+    /* about */
+    #about .container {
+      margin: 0 auto;
+      grid-auto-flow: column;
+    }
+
+    /* services */
+    .cards {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .card {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    /* Cards Swiper Pagina Inicial */
+    #properties .container {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #properties blockquote{
+      padding: 0rem 4rem;
+    }
+
+    /* contact */
+    #contact .container {
+      grid-auto-flow: column;
+      align-items: center;
+    }
+
+    #contact .text {
+      max-width: 25rem;
+    }
+
+    /* footer */
+    footer.section {
+      padding: 3.75rem 0;
+    }
+
+    footer .container {
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .logo {
+    font-size: 2.25rem;
+    }
+
+    /*PAGE REAL ESTATE GALLERY*/
+    .cards-properties.grid {
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+   }
+}
+
+@media (min-width: 2561px ) {
+    /* reusable classes */
+    .container {
+      min-width: 2561px;
+      margin-left: 2.5rem;
+      margin-right: 2.5rem;
+    }
+  
+    .section {
+      padding: calc(20rem + var(--header-height)) 0;
+    }
+  
+    .section header,
+    #properties header {
+      max-width: 32rem;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .button {
+      height: 3.125rem;
+    }
+  
+    /* navigation */
+    nav .menu {
+      opacity: 1;
+      visibility: visible;
+      top: 0;
+    }
+  
+    nav .menu ul {
+      display: flex;
+      gap: 2rem;
+    }
+  
+    nav .menu ul li a.title {
+      font: 400 1rem var(--body-font);
+      -webkit-font-smoothing: antialiased;
+    }
+  
+    nav .menu ul li a.title.active {
+      font-weight: bold;
+      -webkit-font-smoothing: auto;
+    }
+  
+    nav .icon-menu {
+      display: none;
+    }
+  
+    /* layout */
+    main {
+      margin-top: var(--header-height);
+    }
+  
+    /* home */
+    #home .container {
+      grid-auto-flow: column;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+  
+    #home .image {
+      order: 1;
+    }
+  
+    #home .text {
+      margin-top: 5rem;
+      order: 0;
+      max-width: 24rem;
+      text-align: left;
+    }
+  
+    /* about */
+    #about .container {
+      margin: 0 auto;
+      grid-auto-flow: column;
+    }
+  
+    /* services */
+    .cards {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  
+    .card {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  
+    /* Cards Swiper Pagina Inicial */
+    #properties .container {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    #properties blockquote{
+      padding: 0rem 4rem;
+    }
+  
+    /* contact */
+    #contact .container {
+      grid-auto-flow: column;
+      align-items: center;
+    }
+  
+    #contact .text {
+      max-width: 25rem;
+    }
+  
+    /* footer */
+    footer.section {
+      padding: 3.75rem 0;
+    }
+  
+    footer .container {
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    footer .logo {
+      font-size: 2.25rem;
+    }
+
+    /*PAGE REAL ESTATE GALLERY*/
+   .cards-properties.grid {
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+   }
+
+   li{
+    margin-bottom: 1rem;
+    }
+
+    /*Informações do Imóvel*/
+    #lado-lado li{
+    margin-bottom: 0.5rem;
+    }
+}
+
+
+
+
